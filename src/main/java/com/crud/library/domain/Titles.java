@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity(name = "Titles")
+@Entity(name = "TITLES")
 public class Titles
 {
     @Id
@@ -21,13 +21,13 @@ public class Titles
     @NotNull
     private Long id;
 
-    @Column(name = "title")
+    @Column(name = "TITLE")
     private String title;
 
-    @Column(name = "author")
+    @Column(name = "AUTHOR")
     private String author;
 
-    @Column(name = "publish_year")
+    @Column(name = "PUBLISH_YEAR")
     private int publishYear;
 
 

@@ -4,17 +4,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity(name = "Books_Rent")
+@Entity(name = "BOOKS_RENTAL")
 public class BooksRent
 {
     @Id
@@ -22,18 +19,22 @@ public class BooksRent
     @GeneratedValue
     private Long id;
 
-    @Column(name = "return_date")
+    @Column(name = "RETURN_DATE")
     private LocalDate returnDate;
 
-    @Column(name = "start_rent_date")
+    @Column(name = "DATE_OF_RENT")
     private LocalDate startRentDate;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "READER_ID")
     private Readers reader;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "COPY_OF_BOOK_ID")
     private Books book;
 
-    public BooksRent(LocalDate returnDate, LocalDate startRentDate) {
-        this.returnDate = returnDate;
-        this.startRentDate = startRentDate;
+    public BooksRent(int startYear, int startMonth, int startDay, int returnYear, int returnMonth, int returnDay) {
+        this.returnDate = LocalDate.of(returnYear, returnMonth, returnDay);
+        this.startRentDate = LocalDate.of(startYear, startMonth, startDay);
     }
 }

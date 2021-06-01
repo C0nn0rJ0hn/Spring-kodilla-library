@@ -6,11 +6,13 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity(name = "Book_Copies")
+@Entity(name = "BOOK_COPIES")
 public class Books
 {
     @Id
@@ -18,14 +20,22 @@ public class Books
     @NotNull
     private Long id;
 
-    @Column(name = "status")
+    @Column(name = "STATUS")
     private String status;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "book_title_id")
+    @JoinColumn(name = "BOOK_TITLE_ID")
     private Titles bookTitle;
 
     public Books(String status) {
         this.status = status;
     }
+
+    @OneToMany(
+            targetEntity = BooksRent.class,
+            mappedBy = "book",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<BooksRent> booksRentList = new ArrayList<>();
 }

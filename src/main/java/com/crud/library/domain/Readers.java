@@ -3,18 +3,18 @@ package com.crud.library.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
-@AllArgsConstructor
-@Entity(name = "Readers")
+@Setter
+@Entity(name = "READERS")
 public class Readers
 {
     @Id
@@ -22,18 +22,26 @@ public class Readers
     @NotNull
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "NAME")
     private String name;
 
-    @Column(name = "surname")
+    @Column(name = "SURNAME")
     private String surname;
 
-    @Column(name = "account_creation_date")
+    @Column(name = "ACCOUNT_CREATION_DATE")
     private LocalDate accountCreationDate;
 
-    public Readers(String name, String surname, LocalDate accountCreationDate) {
+    public Readers(String name, String surname, int year, int month, int day) {
         this.name = name;
         this.surname = surname;
-        this.accountCreationDate = accountCreationDate;
+        this.accountCreationDate = LocalDate.of(year, month, day);
     }
+
+    @OneToMany(
+            targetEntity = BooksRent.class,
+            mappedBy = "reader",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<BooksRent> booksRentListByReader = new ArrayList<>();
 }
