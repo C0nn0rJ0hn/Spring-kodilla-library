@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -31,10 +32,10 @@ public class Readers
     @Column(name = "ACCOUNT_CREATION_DATE")
     private LocalDate accountCreationDate;
 
-    public Readers(String name, String surname, int year, int month, int day) {
+    public Readers(String name, String surname, LocalDate accountCreationDate) {
         this.name = name;
         this.surname = surname;
-        this.accountCreationDate = LocalDate.of(year, month, day);
+        this.accountCreationDate = accountCreationDate;
     }
 
     @OneToMany(
@@ -44,4 +45,6 @@ public class Readers
             fetch = FetchType.LAZY
     )
     private List<BooksRent> booksRentListByReader = new ArrayList<>();
+
+
 }

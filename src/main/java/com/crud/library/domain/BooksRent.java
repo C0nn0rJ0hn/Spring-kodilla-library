@@ -33,8 +33,9 @@ public class BooksRent
     @JoinColumn(name = "COPY_OF_BOOK_ID")
     private Books book;
 
-    public BooksRent(int startYear, int startMonth, int startDay, int returnYear, int returnMonth, int returnDay) {
-        this.returnDate = LocalDate.of(returnYear, returnMonth, returnDay);
-        this.startRentDate = LocalDate.of(startYear, startMonth, startDay);
+    public BooksRent(LocalDate startRentDate, LocalDate returnDate) {
+        this.returnDate = returnDate;
+        this.startRentDate = startRentDate;
     }
 }
+

@@ -21,13 +21,13 @@ public class Books
     private Long id;
 
     @Column(name = "STATUS")
-    private String status;
+    private RentalStatus status;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "BOOK_TITLE_ID")
     private Titles bookTitle;
 
-    public Books(String status) {
+    public Books(RentalStatus status) {
         this.status = status;
     }
 
