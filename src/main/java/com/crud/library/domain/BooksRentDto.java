@@ -14,5 +14,6 @@ public class BooksRentDto
     private LocalDate startRentDate;
     private Readers reader;
     private Books book;
-
+    //private ReadersDto readerDto;
+    //private BooksDto bookDto;
 }

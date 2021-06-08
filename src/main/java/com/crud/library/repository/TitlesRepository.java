@@ -21,5 +21,5 @@ public interface TitlesRepository extends CrudRepository<Titles, Long>
 
     void deleteById(Long id);
 
-    Optional<Titles> findByPublishYear(int publishYear);
+    List<Titles> findByPublishYear(int publishYear);
 }

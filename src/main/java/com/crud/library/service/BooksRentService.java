@@ -6,10 +6,12 @@ import com.crud.library.domain.RentalStatus;
 import com.crud.library.repository.BooksRentRepository;
 import com.crud.library.repository.BooksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Service
 public class BooksRentService
 {
     @Autowired
@@ -29,10 +31,5 @@ public class BooksRentService
         rentedBook.setStartRentDate(LocalDate.now());
         booksRepository.save(rentedBook.getBook());
         return booksRentRepository.save(rentedBook);
-    }
-
-    public void returnBook(Long rentedBookId)
-    {
-
     }
 }

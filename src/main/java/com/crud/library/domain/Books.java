@@ -9,8 +9,8 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @Entity(name = "BOOK_COPIES")
 public class Books
@@ -21,13 +21,16 @@ public class Books
     private Long id;
 
     @Column(name = "STATUS")
+    @Enumerated(EnumType.STRING)
     private RentalStatus status;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "BOOK_TITLE_ID")
     private Titles bookTitle;
 
-    public Books(RentalStatus status) {
+    public Books(Long id, Titles bookTitle, RentalStatus status) {
+        this.id = id;
+        this.bookTitle = bookTitle;
         this.status = status;
     }
 

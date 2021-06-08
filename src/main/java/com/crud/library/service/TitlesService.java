@@ -3,10 +3,12 @@ package com.crud.library.service;
 import com.crud.library.domain.Titles;
 import com.crud.library.repository.TitlesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class TitlesService
 {
     @Autowired
@@ -32,7 +34,7 @@ public class TitlesService
         return titlesRepository.findById(titleId);
     }
 
-    public Optional<Titles> getTitlesByPublishYear(final int publishYear)
+    public List<Titles> getTitlesByPublishYear(final int publishYear)
     {
         return titlesRepository.findByPublishYear(publishYear);
     }

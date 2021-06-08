@@ -4,11 +4,13 @@ import com.crud.library.domain.Books;
 import com.crud.library.domain.RentalStatus;
 import com.crud.library.repository.BooksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class BooksService
 {
     @Autowired
@@ -46,4 +48,5 @@ public class BooksService
                 .filter(t -> t.getStatus().equals(RentalStatus.AVAILABLE))
                 .count();
     }
+
 }

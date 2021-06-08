@@ -1,10 +1,9 @@
 package com.crud.library.domain;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -32,7 +31,8 @@ public class Readers
     @Column(name = "ACCOUNT_CREATION_DATE")
     private LocalDate accountCreationDate;
 
-    public Readers(String name, String surname, LocalDate accountCreationDate) {
+    public Readers(Long id, String name, String surname, LocalDate accountCreationDate) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.accountCreationDate = accountCreationDate;

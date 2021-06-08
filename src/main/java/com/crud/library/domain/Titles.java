@@ -39,7 +39,8 @@ public class Titles
     )
     private List<Books> booksList = new ArrayList<>();
 
-    public Titles(String title, String author, int publishYear) {
+    public Titles(Long id, String title, String author, int publishYear) {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.publishYear = publishYear;
