@@ -5,34 +5,27 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@Setter
-@Getter
 @NoArgsConstructor
+@Getter
+@Setter
 @Entity(name = "BOOK_COPIES")
 public class Books
 {
     @Id
     @GeneratedValue
-    @NotNull
+    @Column(name = "BOOK_COPY_ID")
     private Long id;
 
-    @Column(name = "STATUS")
+    @Column(name = "STATUS", columnDefinition = "enum('AVAILABLE', 'DESTROYED', 'LOST', 'RENTED')")
     @Enumerated(EnumType.STRING)
     private RentalStatus status;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "BOOK_TITLE_ID")
-    private Titles bookTitle;
-
-    public Books(Long id, Titles bookTitle, RentalStatus status) {
-        this.id = id;
-        this.bookTitle = bookTitle;
-        this.status = status;
-    }
+    private Titles title;
 
     @OneToMany(
             targetEntity = BooksRent.class,
@@ -41,4 +34,10 @@ public class Books
             fetch = FetchType.LAZY
     )
     private List<BooksRent> booksRentList = new ArrayList<>();
+
+    public Books(Long id, RentalStatus status, Titles title) {
+        this.id = id;
+        this.status = status;
+        this.title = title;
+    }
 }

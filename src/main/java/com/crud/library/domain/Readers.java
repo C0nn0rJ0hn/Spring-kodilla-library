@@ -19,7 +19,7 @@ public class Readers
 {
     @Id
     @GeneratedValue
-    @NotNull
+    @Column(name = "READER_ID")
     private Long id;
 
     @Column(name = "NAME")

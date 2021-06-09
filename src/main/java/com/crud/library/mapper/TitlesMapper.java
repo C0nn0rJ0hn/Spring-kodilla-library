@@ -14,9 +14,6 @@ import java.util.stream.Collectors;
 @Service
 public class TitlesMapper
 {
-    /*@Autowired
-    private BooksMapper booksMapper;*/
-
     public Titles mapToTitles(final TitlesDto titlesDto)
     {
         return new Titles(
@@ -33,9 +30,7 @@ public class TitlesMapper
                 titles.getId(),
                 titles.getAuthor(),
                 titles.getTitle(),
-                titles.getPublishYear(),
-                titles.getBooksList()
-                //booksMapper.mapToBooksDtoList(titles.getBooksList())
+                titles.getPublishYear()
         );
     }
 

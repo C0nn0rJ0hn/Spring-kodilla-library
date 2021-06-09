@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @NoArgsConstructor
@@ -15,8 +14,8 @@ import java.time.LocalDate;
 public class BooksRent
 {
     @Id
-    @NotNull
     @GeneratedValue
+    @Column(name = "BOOK_RENT_ID")
     private Long id;
 
     @Column(name = "RETURN_DATE")
@@ -33,9 +32,12 @@ public class BooksRent
     @JoinColumn(name = "COPY_OF_BOOK_ID")
     private Books book;
 
-    public BooksRent(LocalDate startRentDate, LocalDate returnDate) {
-        this.returnDate = returnDate;
+    public BooksRent(Long id, Readers reader, Books book, LocalDate startRentDate, LocalDate returnDate) {
+        this.id = id;
+        this.reader = reader;
+        this.book = book;
         this.startRentDate = startRentDate;
+        this.returnDate = returnDate;
     }
 }
 

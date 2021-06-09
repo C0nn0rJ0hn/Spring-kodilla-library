@@ -18,7 +18,7 @@ public class Titles
 {
     @Id
     @GeneratedValue
-    @NotNull
+    @Column(name = "TITLE_ID")
     private Long id;
 
     @Column(name = "TITLE")
@@ -33,7 +33,7 @@ public class Titles
 
     @OneToMany(
             targetEntity = Books.class,
-            mappedBy = "bookTitle",
+            mappedBy = "title",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )

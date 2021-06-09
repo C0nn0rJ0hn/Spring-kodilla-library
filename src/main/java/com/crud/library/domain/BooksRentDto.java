@@ -10,10 +10,8 @@ import java.time.LocalDate;
 public class BooksRentDto
 {
     private Long id;
-    private LocalDate returnDate;
+    private Long readerId;
+    private Long bookCopyId;
     private LocalDate startRentDate;
-    private Readers reader;
-    private Books book;
-    //private ReadersDto readerDto;
-    //private BooksDto bookDto;
+    private LocalDate returnDate;
 }

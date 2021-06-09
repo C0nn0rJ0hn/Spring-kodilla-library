@@ -38,13 +38,16 @@ public class BooksService
 
     public void updateBookCopyStatus(Long id, RentalStatus status)
     {
-        booksRepository.findById(id).get().setStatus(status);
+        Optional<Books> book = booksRepository.findById(id);
+        Books bookStatusToChange = book.get();
+        bookStatusToChange.setStatus(status);
+        booksRepository.save(bookStatusToChange);
     }
 
     public int bookCopiesAvailableToRent(String title)
     {
         return (int) booksRepository.findAll().stream()
-                .filter(t -> t.getBookTitle().getTitle().equals(title))
+                .filter(t -> t.getTitle().getTitle().equals(title))
                 .filter(t -> t.getStatus().equals(RentalStatus.AVAILABLE))
                 .count();
     }
