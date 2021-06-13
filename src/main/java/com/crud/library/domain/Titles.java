@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity(name = "TITLES")
@@ -37,12 +38,5 @@ public class Titles
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private List<Books> booksList = new ArrayList<>();
-
-    public Titles(Long id, String title, String author, int publishYear) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.publishYear = publishYear;
-    }
+    private List<Books> booksList;
 }

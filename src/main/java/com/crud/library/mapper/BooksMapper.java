@@ -15,7 +15,8 @@ public class BooksMapper
         return new BooksDto(
                 book.getId(),
                 book.getStatus(),
-                book.getTitle()
+                book.getTitle(),
+                book.getBooksRent()
         );
     }
 
@@ -24,7 +25,8 @@ public class BooksMapper
         return new Books(
                 bookDto.getId(),
                 bookDto.getStatus(),
-                bookDto.getTitle()
+                bookDto.getTitle(),
+                bookDto.getBooksRent()
         );
     }
 

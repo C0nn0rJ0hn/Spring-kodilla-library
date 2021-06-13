@@ -10,4 +10,5 @@ public class BooksDto
     private Long id;
     private RentalStatus status;
     private Titles title;
+    private BooksRent booksRent;
 }

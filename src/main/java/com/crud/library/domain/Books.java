@@ -1,5 +1,6 @@
 package com.crud.library.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity(name = "BOOK_COPIES")
@@ -24,20 +26,10 @@ public class Books
     private RentalStatus status;
 
     @ManyToOne
-    @JoinColumn(name = "BOOK_TITLE_ID")
+    @JoinColumn(name = "TITLE_ID")
     private Titles title;
 
-    @OneToMany(
-            targetEntity = BooksRent.class,
-            mappedBy = "book",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-    private List<BooksRent> booksRentList = new ArrayList<>();
-
-    public Books(Long id, RentalStatus status, Titles title) {
-        this.id = id;
-        this.status = status;
-        this.title = title;
-    }
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "BOOK_RENT_ID")
+    private BooksRent booksRent;
 }

@@ -20,7 +20,8 @@ public class TitlesMapper
                 titlesDto.getId(),
                 titlesDto.getTitle(),
                 titlesDto.getAuthor(),
-                titlesDto.getPublishYear()
+                titlesDto.getPublishYear(),
+                titlesDto.getListBooks()
         );
     }
 
@@ -30,7 +31,8 @@ public class TitlesMapper
                 titles.getId(),
                 titles.getAuthor(),
                 titles.getTitle(),
-                titles.getPublishYear()
+                titles.getPublishYear(),
+                titles.getBooksList()
         );
     }
 

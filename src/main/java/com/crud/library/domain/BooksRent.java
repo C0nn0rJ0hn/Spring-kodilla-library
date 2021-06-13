@@ -28,8 +28,8 @@ public class BooksRent
     @JoinColumn(name = "READER_ID")
     private Readers reader;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "COPY_OF_BOOK_ID")
+    @OneToOne
+    @JoinColumn(name = "BOOK_COPY_ID")
     private Books book;
 
     public BooksRent(Long id, Readers reader, Books book, LocalDate startRentDate, LocalDate returnDate) {

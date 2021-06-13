@@ -13,4 +13,5 @@ public class TitlesDto
     private String author;
     private String title;
     private int publishYear;
+    private List<Books> listBooks;
 }
