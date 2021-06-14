@@ -1,7 +1,6 @@
 package com.crud.library.service;
 
-import com.crud.library.domain.Readers;
-import com.crud.library.service.ReadersService;
+import com.crud.library.domain.Reader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +13,13 @@ import java.util.List;
 public class ReaderTestSuite
 {
     @Autowired
-    private ReadersService service;
+    private ReaderService service;
 
     @Test
     public void testAddNewReader()
     {
         //Given
-        Readers reader = new Readers(null, "John", "Webber", LocalDate.of(2021, 06, 10));
+        Reader reader = new Reader(null, "John", "Webber", LocalDate.of(2021, 06, 10));
 
         //When
         service.addReader(reader);
@@ -38,15 +37,15 @@ public class ReaderTestSuite
     public void testGetAllReaders()
     {
         //Given
-        Readers reader1 = new Readers(null, "Reader1", "Reader1", LocalDate.of(2020, 10,12));
+        Reader reader1 = new Reader(null, "Reader1", "Reader1", LocalDate.of(2020, 10,12));
 
         //When
         service.addReader(reader1);
-        List<Readers> readersList = service.getAllReaders();
+        List<Reader> readerList = service.getAllReaders();
         Long id = reader1.getId();
 
         //Then
-        Assertions.assertEquals(2, readersList.size());
+        Assertions.assertEquals(2, readerList.size());
         Assertions.assertEquals("Reader1", service.getReaderById(id).get().getSurname());
 
         //Cleanup
@@ -57,7 +56,7 @@ public class ReaderTestSuite
     public void testGetReaderById()
     {
         //Given
-        Readers reader1 = new Readers(null, "Reader1", "Reader1", LocalDate.of(2020, 10,12));
+        Reader reader1 = new Reader(null, "Reader1", "Reader1", LocalDate.of(2020, 10,12));
 
         //When
         service.addReader(reader1);

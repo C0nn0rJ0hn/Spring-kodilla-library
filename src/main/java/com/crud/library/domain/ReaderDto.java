@@ -8,12 +8,11 @@ import java.util.List;
 
 @Getter
 @AllArgsConstructor
-public class ReadersDto
+public class ReaderDto
 {
     private Long id;
     private String name;
     private String surname;
     private LocalDate accountCreationDate;
-    private List<BooksRent> booksRentListByReader;
-    //private List<BooksRentDto> booksRentListByReaderDto;
+    private List<Rent> rentListByReader;
 }

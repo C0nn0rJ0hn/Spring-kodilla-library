@@ -6,20 +6,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@Entity(name = "TITLES")
-public class Titles
+@Entity(name = "BOOKS")
+public class Book
 {
     @Id
     @GeneratedValue
-    @Column(name = "TITLE_ID")
+    @Column(name = "BOOK_ID")
     private Long id;
 
     @Column(name = "TITLE")
@@ -33,10 +31,10 @@ public class Titles
 
 
     @OneToMany(
-            targetEntity = Books.class,
-            mappedBy = "title",
+            targetEntity = BookCopy.class,
+            mappedBy = "book",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private List<Books> booksList;
+    private List<BookCopy> bookCopyList;
 }

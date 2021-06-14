@@ -1,12 +1,10 @@
 package com.crud.library.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity(name = "READERS")
-public class Readers
+public class Reader
 {
     @Id
     @GeneratedValue
@@ -31,7 +29,7 @@ public class Readers
     @Column(name = "ACCOUNT_CREATION_DATE")
     private LocalDate accountCreationDate;
 
-    public Readers(Long id, String name, String surname, LocalDate accountCreationDate) {
+    public Reader(Long id, String name, String surname, LocalDate accountCreationDate) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -39,12 +37,12 @@ public class Readers
     }
 
     @OneToMany(
-            targetEntity = BooksRent.class,
+            targetEntity = Rent.class,
             mappedBy = "reader",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private List<BooksRent> booksRentListByReader = new ArrayList<>();
+    private List<Rent> rentList = new ArrayList<>();
 
 
 }

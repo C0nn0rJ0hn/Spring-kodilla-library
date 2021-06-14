@@ -1,23 +1,26 @@
 package com.crud.library.repository;
 
-import com.crud.library.domain.Books;
+import com.crud.library.domain.Book;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+
 @Repository
-public interface BooksRepository extends CrudRepository<Books, Long>
+public interface BookRepository extends CrudRepository<Book, Long>
 {
     @Override
-    Books save(Books book);
+    Book save(Book title);
 
     @Override
-    List<Books> findAll();
+    List<Book> findAll();
 
     @Override
-    Optional<Books> findById(Long id);
+    Optional<Book> findById(Long id);
 
     void deleteById(Long id);
+
+    List<Book> findByPublishYear(int publishYear);
 }

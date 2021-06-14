@@ -5,10 +5,10 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class BooksDto
+public class BookCopyDto
 {
     private Long id;
     private RentalStatus status;
-    private Titles title;
-    private BooksRent booksRent;
+    private Book book;
+    private Rent rent;
 }

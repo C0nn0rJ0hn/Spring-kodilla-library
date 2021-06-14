@@ -7,11 +7,11 @@ import java.util.List;
 
 @AllArgsConstructor
 @Getter
-public class TitlesDto
+public class BookDto
 {
     private Long id;
     private String author;
     private String title;
     private int publishYear;
-    private List<Books> listBooks;
+    private List<BookCopy> listBookCopy;
 }

@@ -1,7 +1,6 @@
 package com.crud.library.repository;
 
-import com.crud.library.domain.Readers;
-import lombok.Builder;
+import com.crud.library.domain.Reader;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,16 +8,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ReadersRepository extends CrudRepository<Readers, Long>
+public interface ReaderRepository extends CrudRepository<Reader, Long>
 {
     @Override
-    Readers save(Readers reader);
+    Reader save(Reader reader);
 
     @Override
-    List<Readers> findAll();
+    List<Reader> findAll();
 
     @Override
-    Optional<Readers> findById(Long id);
+    Optional<Reader> findById(Long id);
 
 
     void deleteById(Long id);

@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @AllArgsConstructor
 @Getter
-public class BooksRentDto
+public class RentDto
 {
     private Long id;
     private Long readerId;

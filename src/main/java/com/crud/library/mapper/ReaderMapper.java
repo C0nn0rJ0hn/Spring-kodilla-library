@@ -1,18 +1,18 @@
 package com.crud.library.mapper;
 
-import com.crud.library.domain.Readers;
-import com.crud.library.domain.ReadersDto;
+import com.crud.library.domain.Reader;
+import com.crud.library.domain.ReaderDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ReadersMapper
+public class ReaderMapper
 {
-    public Readers mapToReaders(final ReadersDto readerDto)
+    public Reader mapToReader(final ReaderDto readerDto)
     {
-        return new Readers(
+        return new Reader(
                 readerDto.getId(),
                 readerDto.getName(),
                 readerDto.getSurname(),
@@ -21,21 +21,21 @@ public class ReadersMapper
 
     }
 
-    public ReadersDto mapToReadersDto(final Readers reader)
+    public ReaderDto mapToReaderDto(final Reader reader)
     {
-        return new ReadersDto(
+        return new ReaderDto(
                 reader.getId(),
                 reader.getName(),
                 reader.getSurname(),
                 reader.getAccountCreationDate(),
-                reader.getBooksRentListByReader()
+                reader.getRentList()
         );
     }
 
-    public List<ReadersDto> mapToReadersDtoList(final List<Readers> readersList)
+    public List<ReaderDto> mapToReaderDtoList(final List<Reader> readerList)
     {
-        return readersList.stream()
-                .map(this::mapToReadersDto)
+        return readerList.stream()
+                .map(this::mapToReaderDto)
                 .collect(Collectors.toList());
     }
 }

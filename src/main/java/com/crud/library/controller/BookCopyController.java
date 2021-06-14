@@ -1,11 +1,11 @@
 package com.crud.library.controller;
 
-import com.crud.library.domain.Books;
-import com.crud.library.domain.BooksDto;
+import com.crud.library.domain.BookCopy;
+import com.crud.library.domain.BookCopyDto;
 import com.crud.library.domain.RentalStatus;
 import com.crud.library.exceptions.NoBookCopyFoundException;
-import com.crud.library.mapper.BooksMapper;
-import com.crud.library.service.BooksService;
+import com.crud.library.mapper.BookCopyMapper;
+import com.crud.library.service.BookCopyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -16,22 +16,22 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/library/bookCopies")
-public class BooksController
+public class BookCopyController
 {
-    private final BooksMapper mapper;
-    private final BooksService service;
+    private final BookCopyMapper mapper;
+    private final BookCopyService service;
 
     @GetMapping(value = "/getBookCopies")
-    public List<BooksDto> getBookCopies()
+    public List<BookCopyDto> getBookCopies()
     {
-        List<Books> bookCopiesList = service.getAllBookCopies();
-        return mapper.mapToBooksDtoList(bookCopiesList);
+        List<BookCopy> bookCopiesList = service.getAllBookCopies();
+        return mapper.mapToBookCopyDtoList(bookCopiesList);
     }
 
     @PostMapping(value = "/addNewCopy", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addNewCopyOfBook(@RequestBody BooksDto booksDto)
+    public void addNewCopyOfBook(@RequestBody BookCopyDto bookCopyDto)
     {
-        Books book = mapper.mapToBooks(booksDto);
+        BookCopy book = mapper.mapToBookCopy(bookCopyDto);
         service.addBookCopy(book);
     }
 
@@ -42,9 +42,9 @@ public class BooksController
     }
 
     @GetMapping(value = "/getBookCopyById")
-    public BooksDto getBookCopyById(@RequestParam Long bookCopyId) throws NoBookCopyFoundException
+    public BookCopyDto getBookCopyById(@RequestParam Long bookCopyId) throws NoBookCopyFoundException
     {
-        return mapper.mapToBooksDto(service.getBookCopyById(bookCopyId).orElseThrow(NoBookCopyFoundException::new));
+        return mapper.mapToBookCopyDto(service.getBookCopyById(bookCopyId).orElseThrow(NoBookCopyFoundException::new));
     }
 
     @DeleteMapping(value = "/deleteBookCopy")

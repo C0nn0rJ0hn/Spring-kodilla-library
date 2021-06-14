@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity(name = "BOOKS_RENTAL")
-public class BooksRent
+public class Rent
 {
     @Id
     @GeneratedValue
@@ -26,16 +26,16 @@ public class BooksRent
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "READER_ID")
-    private Readers reader;
+    private Reader reader;
 
     @OneToOne
     @JoinColumn(name = "BOOK_COPY_ID")
-    private Books book;
+    private BookCopy bookCopy;
 
-    public BooksRent(Long id, Readers reader, Books book, LocalDate startRentDate, LocalDate returnDate) {
+    public Rent(Long id, Reader reader, BookCopy bookCopy, LocalDate startRentDate, LocalDate returnDate) {
         this.id = id;
         this.reader = reader;
-        this.book = book;
+        this.bookCopy = bookCopy;
         this.startRentDate = startRentDate;
         this.returnDate = returnDate;
     }

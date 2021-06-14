@@ -6,15 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Entity(name = "BOOK_COPIES")
-public class Books
+public class BookCopy
 {
     @Id
     @GeneratedValue
@@ -26,10 +25,10 @@ public class Books
     private RentalStatus status;
 
     @ManyToOne
-    @JoinColumn(name = "TITLE_ID")
-    private Titles title;
+    @JoinColumn(name = "BOOK_ID")
+    private Book book;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "BOOK_RENT_ID")
-    private BooksRent booksRent;
+    private Rent rent;
 }
