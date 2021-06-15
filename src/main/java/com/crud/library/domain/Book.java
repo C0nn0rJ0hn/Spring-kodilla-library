@@ -1,5 +1,6 @@
 package com.crud.library.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,5 +37,6 @@ public class Book
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
+    @JsonManagedReference
     private List<BookCopy> bookCopyList;
 }

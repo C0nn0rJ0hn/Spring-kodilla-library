@@ -28,7 +28,7 @@ public class ReaderMapper
                 reader.getName(),
                 reader.getSurname(),
                 reader.getAccountCreationDate(),
-                reader.getRentList()
+                reader.getRentListReader()
         );
     }
 

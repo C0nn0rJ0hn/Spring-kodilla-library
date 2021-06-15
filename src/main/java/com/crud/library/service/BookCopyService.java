@@ -38,10 +38,10 @@ public class BookCopyService
 
     public void updateBookCopyStatus(Long id, RentalStatus status)
     {
-        Optional<BookCopy> book = bookCopyRepository.findById(id);
-        BookCopy bookStatusToChange = book.get();
-        bookStatusToChange.setStatus(status);
-        bookCopyRepository.save(bookStatusToChange);
+        Optional<BookCopy> bookCopy = bookCopyRepository.findById(id);
+        BookCopy changedStatus = bookCopy.get();
+        changedStatus.setStatus(status);
+        bookCopyRepository.save(changedStatus);
     }
 
     public int bookCopiesAvailableToRent(String title)

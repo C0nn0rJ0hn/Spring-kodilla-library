@@ -1,15 +1,17 @@
 package com.crud.library.domain;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @Entity(name = "BOOK_COPIES")
@@ -26,9 +28,21 @@ public class BookCopy
 
     @ManyToOne
     @JoinColumn(name = "BOOK_ID")
+    @JsonBackReference
     private Book book;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "BOOK_RENT_ID")
-    private Rent rent;
+    @OneToMany(
+            targetEntity = Rent.class,
+            mappedBy = "bookCopy",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @JsonManagedReference
+    private List<Rent> rentList = new ArrayList<>();
+
+    public BookCopy(Long id, RentalStatus status, Book book) {
+        this.id = id;
+        this.status = status;
+        this.book = book;
+    }
 }

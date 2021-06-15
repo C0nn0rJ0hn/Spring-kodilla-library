@@ -47,4 +47,9 @@ public class RentService
         bookCopyRepository.save(returnedBook.getBookCopy());
         rentRepository.save(returnedBook);
     }
+
+    public void deleteRentBookById(Long rentedBookId)
+    {
+        rentRepository.deleteById(rentedBookId);
+    }
 }

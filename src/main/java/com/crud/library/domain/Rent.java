@@ -1,5 +1,7 @@
 package com.crud.library.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,10 +28,12 @@ public class Rent
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "READER_ID")
+    @JsonIgnore
     private Reader reader;
 
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "BOOK_COPY_ID")
+    @JsonBackReference
     private BookCopy bookCopy;
 
     public Rent(Long id, Reader reader, BookCopy bookCopy, LocalDate startRentDate, LocalDate returnDate) {

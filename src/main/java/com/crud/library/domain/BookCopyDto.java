@@ -8,7 +8,6 @@ import lombok.Getter;
 public class BookCopyDto
 {
     private Long id;
+    private Long bookId;
     private RentalStatus status;
-    private Book book;
-    private Rent rent;
 }

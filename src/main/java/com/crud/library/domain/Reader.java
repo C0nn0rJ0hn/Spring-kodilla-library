@@ -1,5 +1,7 @@
 package com.crud.library.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -42,7 +44,8 @@ public class Reader
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private List<Rent> rentList = new ArrayList<>();
+    @JsonIgnore
+    private List<Rent> rentListReader = new ArrayList<>();
 
 
 }
