@@ -1,7 +1,5 @@
 package com.crud.library.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,7 +26,6 @@ public class BookCopy
 
     @ManyToOne
     @JoinColumn(name = "BOOK_ID")
-    @JsonBackReference
     private Book book;
 
     @OneToMany(
@@ -37,8 +34,7 @@ public class BookCopy
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    @JsonManagedReference
-    private List<Rent> rentList = new ArrayList<>();
+    private List<Rent> rentedBookCopiesList;
 
     public BookCopy(Long id, RentalStatus status, Book book) {
         this.id = id;

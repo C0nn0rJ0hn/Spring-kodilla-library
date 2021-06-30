@@ -26,14 +26,12 @@ public class Rent
     @Column(name = "DATE_OF_RENT")
     private LocalDate startRentDate;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "READER_ID")
-    @JsonIgnore
     private Reader reader;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "BOOK_COPY_ID")
-    @JsonBackReference
     private BookCopy bookCopy;
 
     public Rent(Long id, Reader reader, BookCopy bookCopy, LocalDate startRentDate, LocalDate returnDate) {

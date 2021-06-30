@@ -1,11 +1,10 @@
 package com.crud.library.service;
 
-
+import com.crud.library.domain.BookCopy;
 import com.crud.library.domain.Rent;
 import com.crud.library.domain.RentalStatus;
-import com.crud.library.repository.RentRepository;
 import com.crud.library.repository.BookCopyRepository;
-import com.crud.library.repository.ReaderRepository;
+import com.crud.library.repository.RentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,34 +21,31 @@ public class RentService
     @Autowired
     private BookCopyRepository bookCopyRepository;
 
-    @Autowired
-    private ReaderRepository readerRepository;
-
-    public List<Rent> getAllRentedBooks()
+    public List<Rent> getAllRentedBookCopies()
     {
         return rentRepository.findAll();
     }
 
-    public Rent rentBook(Rent rentedBook)
+    public void deleteRentedBookCopyRecord(Long rentId)
     {
-        rentedBook.getBookCopy().setStatus(RentalStatus.RENTED);
-        rentedBook.setStartRentDate(LocalDate.now().minusDays(15));
-        bookCopyRepository.save(rentedBook.getBookCopy());
-        return rentRepository.save(rentedBook);
+        rentRepository.deleteById(rentId);
     }
 
-    public void returnBook(Long rentedBookId)
+    public Rent rentBookCopy(final Rent rentedBookCopy)
     {
-        Optional<Rent> rentedBook = rentRepository.findById(rentedBookId);
-        Rent returnedBook = rentedBook.get();
-        returnedBook.getBookCopy().setStatus(RentalStatus.AVAILABLE);
-        rentedBook.get().setReturnDate(LocalDate.now());
-        bookCopyRepository.save(returnedBook.getBookCopy());
-        rentRepository.save(returnedBook);
+        BookCopy getRentedBook = rentedBookCopy.getBookCopy();
+        getRentedBook.setStatus(RentalStatus.RENTED);
+        bookCopyRepository.save(getRentedBook);
+        return rentRepository.save(rentedBookCopy);
     }
 
-    public void deleteRentBookById(Long rentedBookId)
+    public void returnBookCopy(Long rentedBookCopyId)
     {
-        rentRepository.deleteById(rentedBookId);
+        Optional<Rent> rent = rentRepository.findById(rentedBookCopyId);
+        Rent bookCopyToReturn = rent.get();
+        bookCopyToReturn.getBookCopy().setStatus(RentalStatus.AVAILABLE);
+        bookCopyRepository.save(bookCopyToReturn.getBookCopy());
+        bookCopyToReturn.setReturnDate(LocalDate.now());
+        rentRepository.save(bookCopyToReturn);
     }
 }

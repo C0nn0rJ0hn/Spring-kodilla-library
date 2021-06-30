@@ -23,21 +23,20 @@ public class RentController {
     @GetMapping(value = "/getRentedBooks")
     public List<RentDto> getRentedBooks()
     {
-        return mapper.mapToRentDtoList(service.getAllRentedBooks());
+        return mapper.mapToRentDtoList(service.getAllRentedBookCopies());
     }
 
     @PostMapping(value = "/rentBook")
     public RentDto rentBook(@RequestBody RentDto rentDto)
     {
-        Rent bookToRent = mapper.mapToRent(rentDto);
-        Rent saveRentedBook = service.rentBook(bookToRent);
-        return mapper.mapToRentDto(saveRentedBook);
+        Rent rent = service.rentBookCopy(mapper.mapToRent(rentDto));
+        return mapper.mapToRentDto(rent);
     }
 
     @PutMapping(value = "/returnBook")
     public void returnBook(@RequestParam Long rentedBookId)
     {
-        service.returnBook(rentedBookId);
+        service.returnBookCopy(rentedBookId);
     }
 
 }

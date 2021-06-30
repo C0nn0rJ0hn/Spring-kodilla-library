@@ -1,8 +1,10 @@
 package com.crud.library.service;
 
 import com.crud.library.domain.BookCopy;
+import com.crud.library.domain.Rent;
 import com.crud.library.domain.RentalStatus;
 import com.crud.library.repository.BookCopyRepository;
+import com.crud.library.repository.RentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ public class BookCopyService
 {
     @Autowired
     private BookCopyRepository bookCopyRepository;
+
 
     public BookCopy addBookCopy(BookCopy book)
     {

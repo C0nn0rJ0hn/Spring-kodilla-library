@@ -3,12 +3,15 @@ package com.crud.library.service;
 import com.crud.library.domain.Reader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@RunWith(SpringRunner.class)
 @SpringBootTest
 public class ReaderTestSuite
 {
@@ -45,7 +48,7 @@ public class ReaderTestSuite
         Long id = reader1.getId();
 
         //Then
-        Assertions.assertEquals(2, readerList.size());
+        Assertions.assertEquals(1, readerList.size());
         Assertions.assertEquals("Reader1", service.getReaderById(id).get().getSurname());
 
         //Cleanup

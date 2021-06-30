@@ -37,6 +37,5 @@ public class Book
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    @JsonManagedReference
     private List<BookCopy> bookCopyList;
 }

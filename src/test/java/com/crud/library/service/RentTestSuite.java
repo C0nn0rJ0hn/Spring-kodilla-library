@@ -3,17 +3,21 @@ package com.crud.library.service;
 import com.crud.library.domain.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
+@RunWith(SpringRunner.class)
 @SpringBootTest
 public class RentTestSuite
 {
     @Autowired
-    private RentService service;
+    private RentService rentService;
 
     @Autowired
     private BookService bookService;
@@ -25,28 +29,89 @@ public class RentTestSuite
     private ReaderService readerService;
 
     @Test
-    public void rentBookTest()
+    public void getAllRentedBookCopies()
     {
         //Given
-        Book book = new Book(null, "Title 1", "Author 1", 1999, null);
-        BookCopy bookCopy = new BookCopy(null, RentalStatus.AVAILABLE, book);
-        Reader reader = new Reader(null, "Name", "Surname", LocalDate.of(1993, 06,30));
-        Rent rentBook = new Rent(null, reader, bookCopy, null, null);
+        Reader reader = new Reader(null, "Name", "Surname", LocalDate.of(2021,6,29));
         readerService.addReader(reader);
+
+        Book book = new Book(null, "Title", "Author", 2021, new ArrayList<>());
         bookService.addBook(book);
+
+        BookCopy bookCopy = new BookCopy(null, RentalStatus.AVAILABLE, book);
         bookCopyService.addBookCopy(bookCopy);
 
+        Rent rent = new Rent(null, reader, bookCopy, LocalDate.now(), LocalDate.now().plusDays(30));
+        rentService.rentBookCopy(rent);
 
         //When
-        service.rentBook(rentBook);
-        List<Rent> listOfRentedBooks = service.getAllRentedBooks();
+        List<Rent> rentedBookCopies = rentService.getAllRentedBookCopies();
 
         //Then
-        Assertions.assertEquals(1, listOfRentedBooks.size());
+        Assertions.assertEquals(1, rentedBookCopies.size());
 
         //Cleanup
-        service.deleteRentBookById(rentBook.getId());
-        bookService.deleteBookById(bookCopy.getId());
+        rentService.deleteRentedBookCopyRecord(rent.getId());
+        bookCopyService.deleteBookCopyById(bookCopy.getId());
+        bookService.deleteBookById(book.getId());
+        readerService.deleteReaderById(reader.getId());
+    }
+
+    @Test
+    public void rentBookCopyTest()
+    {
+        //Given
+        Reader reader = new Reader(null, "Name", "Surname", LocalDate.of(2021,6,29));
+        readerService.addReader(reader);
+
+        Book book = new Book(null, "Title", "Author", 2021, new ArrayList<>());
+        bookService.addBook(book);
+
+        BookCopy bookCopy = new BookCopy(null, RentalStatus.AVAILABLE, book);
+        bookCopyService.addBookCopy(bookCopy);
+
+        Rent rent = new Rent(null, reader, bookCopy, LocalDate.now(), LocalDate.now().plusDays(30));
+
+        //When
+        rentService.rentBookCopy(rent);
+
+
+        //Then
+        Assertions.assertEquals("Author", rent.getBookCopy().getBook().getAuthor());
+        Assertions.assertEquals(1, rentService.getAllRentedBookCopies().size());
+
+        //Cleanup
+        rentService.deleteRentedBookCopyRecord(rent.getId());
+        bookCopyService.deleteBookCopyById(bookCopy.getId());
+        bookService.deleteBookById(book.getId());
+        readerService.deleteReaderById(reader.getId());
+    }
+
+    @Test
+    public void returnBookCopyTest()
+    {
+        //Given
+        Reader reader = new Reader(null, "Name", "Surname", LocalDate.of(2021,6,29));
+        readerService.addReader(reader);
+
+        Book book = new Book(null, "Title", "Author", 2021, new ArrayList<>());
+        bookService.addBook(book);
+
+        BookCopy bookCopy = new BookCopy(null, RentalStatus.AVAILABLE, book);
+        bookCopyService.addBookCopy(bookCopy);
+
+        Rent rent = new Rent(null, reader, bookCopy, LocalDate.now(), LocalDate.now().plusDays(30));
+        rentService.rentBookCopy(rent);
+
+        //When
+        rentService.returnBookCopy(rent.getId());
+
+        //Then
+        Assertions.assertEquals(RentalStatus.AVAILABLE, rentService.getAllRentedBookCopies().get(0).getBookCopy().getStatus());
+
+        //Cleanup
+        rentService.deleteRentedBookCopyRecord(rent.getId());
+        bookCopyService.deleteBookCopyById(bookCopy.getId());
         bookService.deleteBookById(book.getId());
         readerService.deleteReaderById(reader.getId());
     }

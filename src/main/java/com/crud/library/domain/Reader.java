@@ -44,8 +44,5 @@ public class Reader
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    @JsonIgnore
-    private List<Rent> rentListReader = new ArrayList<>();
-
-
+    private List<Rent> rentListReader;
 }

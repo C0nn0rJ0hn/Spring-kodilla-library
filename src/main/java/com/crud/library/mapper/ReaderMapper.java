@@ -2,6 +2,7 @@ package com.crud.library.mapper;
 
 import com.crud.library.domain.Reader;
 import com.crud.library.domain.ReaderDto;
+import com.crud.library.domain.Rent;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class ReaderMapper
                 reader.getName(),
                 reader.getSurname(),
                 reader.getAccountCreationDate(),
-                reader.getRentListReader()
+                reader.getRentListReader().stream().map(Rent::getId).collect(Collectors.toList())
         );
     }
 

@@ -2,6 +2,7 @@ package com.crud.library.mapper;
 
 import com.crud.library.domain.BookCopy;
 import com.crud.library.domain.BookCopyDto;
+import com.crud.library.domain.Rent;
 import com.crud.library.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +16,14 @@ public class BookCopyMapper
     @Autowired
     private BookRepository repository;
 
+
     public BookCopyDto mapToBookCopyDto(BookCopy bookCopy)
     {
         return new BookCopyDto(
                 bookCopy.getId(),
                 bookCopy.getBook().getId(),
-                bookCopy.getStatus()
+                bookCopy.getStatus(),
+                bookCopy.getRentedBookCopiesList().stream().map(Rent::getId).collect(Collectors.toList())
         );
     }
 

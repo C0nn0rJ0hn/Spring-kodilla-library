@@ -2,23 +2,20 @@ package com.crud.library.repository;
 
 import com.crud.library.domain.Rent;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-@Repository
 public interface RentRepository extends CrudRepository<Rent, Long>
 {
     @Override
-    Rent save(Rent bookRent);
+    Rent save(Rent rent);
 
     @Override
     List<Rent> findAll();
 
     @Override
-    Optional<Rent> findById(Long id);
+    Optional<Rent> findById(Long rentedBookCopyId);
 
-    void deleteById(Long id);
-
+    void deleteById(Long rentId);
 }
