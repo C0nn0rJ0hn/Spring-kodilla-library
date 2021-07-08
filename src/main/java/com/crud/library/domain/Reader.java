@@ -44,5 +44,5 @@ public class Reader
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private List<Rent> rentListReader;
+    private List<Rent> rentListReader = new ArrayList<>();
 }

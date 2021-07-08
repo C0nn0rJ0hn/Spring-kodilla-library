@@ -34,7 +34,7 @@ public class BookCopy
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private List<Rent> rentedBookCopiesList;
+    private List<Rent> rentedBookCopiesList = new ArrayList<>();
 
     public BookCopy(Long id, RentalStatus status, Book book) {
         this.id = id;

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -37,5 +38,5 @@ public class Book
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private List<BookCopy> bookCopyList;
+    private List<BookCopy> bookCopyList = new ArrayList<>();
 }
