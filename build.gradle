@@ -19,6 +19,11 @@ dependencies {
     implementation 'junit:junit:4.12'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+	implementation 'org.springframework.boot:spring-boot-starter-cache:2.6.3'
+	implementation 'javax.cache:cache-api:1.1.1'
+	implementation 'org.ehcache:ehcache:3.9.9'
+
+
 	runtimeOnly 'mysql:mysql-connector-java'
 
 	compileOnly 'org.projectlombok:lombok:1.18.20'
