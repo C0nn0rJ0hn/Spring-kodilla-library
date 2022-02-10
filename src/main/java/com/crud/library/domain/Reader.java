@@ -4,8 +4,11 @@ package com.crud.library.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +17,9 @@ import java.util.List;
 @Getter
 @Setter
 @Entity(name = "READERS")
-public class Reader
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "reader")
+public class Reader implements Serializable
 {
     @Id
     @GeneratedValue
@@ -37,6 +42,7 @@ public class Reader
         this.accountCreationDate = accountCreationDate;
     }
 
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @OneToMany(
             targetEntity = Rent.class,
             mappedBy = "reader",

@@ -14,21 +14,24 @@ public class ReaderService
     @Autowired
     private ReaderRepository readerRepository;
 
-    public Reader addReader(Reader reader)
-    {
+    //@CachePut(value = "allReaders", key = "'readers'")
+    public Reader addReader(Reader reader) {
         return readerRepository.save(reader);
     }
 
+    //@Cacheable(value = "allReaders")
     public List<Reader> getAllReaders()
     {
         return readerRepository.findAll();
     }
 
+    //@Cacheable(value = "reader", key = "#readerId")
     public Optional<Reader> getReaderById(final Long readerId)
     {
         return readerRepository.findById(readerId);
     }
 
+    //@CacheEvict(value = "reader", key = "#readerId")
     public void deleteReaderById(final Long readerId)
     {
         readerRepository.deleteById(readerId);

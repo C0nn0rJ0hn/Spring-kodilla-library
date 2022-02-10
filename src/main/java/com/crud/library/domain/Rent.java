@@ -3,15 +3,19 @@ package com.crud.library.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity(name = "BOOKS_RENTAL")
-public class Rent
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "reader")
+public class Rent implements Serializable
 {
     @Id
     @GeneratedValue
@@ -24,6 +28,7 @@ public class Rent
     @Column(name = "DATE_OF_RENT")
     private LocalDate startRentDate;
 
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @ManyToOne
     @JoinColumn(name = "READER_ID")
     private Reader reader;

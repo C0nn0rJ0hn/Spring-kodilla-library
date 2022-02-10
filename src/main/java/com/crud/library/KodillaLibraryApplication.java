@@ -10,5 +10,6 @@ public class KodillaLibraryApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(KodillaLibraryApplication.class, args);
+		System.out.println(org.hibernate.Version.getVersionString());
 	}
 }

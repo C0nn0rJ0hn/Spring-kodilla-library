@@ -17,7 +17,6 @@ import java.util.List;
 @RequestMapping("v1/library/readers")
 public class ReaderController
 {
-
     private final ReaderMapper readerMapper;
     private final ReaderService readerService;
 
@@ -37,13 +36,11 @@ public class ReaderController
     @PostMapping(value = "addReader", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void addReader(@RequestBody ReaderDto readerDto)
     {
-        Reader reader = readerMapper.mapToReader(readerDto);
-        readerService.addReader(reader);
+        readerService.addReader(readerMapper.mapToReader(readerDto));
     }
 
     @PutMapping(value = "updateReader")
-    public ReaderDto updateReader(@RequestBody ReaderDto readerDto)
-    {
+    public ReaderDto updateReader(@RequestBody ReaderDto readerDto) {
         Reader reader = readerMapper.mapToReader(readerDto);
         Reader savedReader = readerService.addReader(reader);
         return readerMapper.mapToReaderDto(savedReader);
